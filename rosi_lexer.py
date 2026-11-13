@@ -70,7 +70,7 @@ class RosiLexer(RegexLexer):
           (r'/\\(?![:!#$%&*+.\\/<=>?@^|~-]+)', Name.Function),
           (r'(<-|:|->|=>|=)(?![:!#$%&*+.\\/<=>?@^|~-]+)', Operator.Word),  # specials
           (r':[:!#$%&*+.\\/<=>?@^|~-]*', Keyword.Type),  # Constructor operators
-          (r'[:!#$%&*+.\\/<=>?@^|~-μΠΣ⇒→▹∀⊤_∖λΛ]+', Operator),  # Other operators
+          (r'[:!#$%&*+.\\/<=>?@^|~-μΠΣ⇒→▹∀⊤_∖λΛ\\$＠]+', Operator),  # Other operators
           #  Numbers
           (r'0[xX]_*[\da-fA-F](_*[\da-fA-F])*_*[pP][+-]?\d(_*\d)*', Number.Float),
           (r'0[xX]_*[\da-fA-F](_*[\da-fA-F])*\.[\da-fA-F](_*[\da-fA-F])*'
