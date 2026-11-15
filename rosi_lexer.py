@@ -37,7 +37,7 @@ class RosiLexer(RegexLexer):
 
   reserved = ('forall', 'Pi', 'Sigma', 'Mu',
               'Record', 'Variant', 'row',
-              'let', 'newtype', 'type', 'in', 'out', 'fix', 'prj', 'inj', 'ana', 'syn', 'Π', 'Σ', 'μ')
+              'let', 'newtype', 'type', 'in', 'out', 'fix', 'prj', 'inj', 'ana', 'syn', 'Π', 'Σ', 'μ', 'L', '⋆')
   ascii = ('NUL', 'SOH', '[SE]TX', 'EOT', 'ENQ', 'ACK',
            'BEL', 'BS', 'HT', 'LF', 'VT', 'FF', 'CR', 'S[OI]', 'DLE',
            'DC[1-4]', 'NAK', 'SYN', 'ETB', 'CAN',
@@ -70,7 +70,7 @@ class RosiLexer(RegexLexer):
           (r'/\\(?![:!#$%&*+.\\/<=>?@^|~-]+)', Name.Function),
           (r'(<-|:|->|=>|=)(?![:!#$%&*+.\\/<=>?@^|~-]+)', Operator.Word),  # specials
           (r':[:!#$%&*+.\\/<=>?@^|~-]*', Keyword.Type),  # Constructor operators
-          (r'[:!#$%&*+.\\/<=>?@^|~-μΠΣ⇒→▹∀⊤_∖λΛ＠]+', Operator),  # Other operators
+          (r'[:!#$%&*+.\\/<=>?@^|~-μΠΣ⇒→▹∀⊤_∖λΛ＠⋆L]+', Operator),  # Other operators
           #  Numbers
           (r'0[xX]_*[\da-fA-F](_*[\da-fA-F])*_*[pP][+-]?\d(_*\d)*', Number.Float),
           (r'0[xX]_*[\da-fA-F](_*[\da-fA-F])*\.[\da-fA-F](_*[\da-fA-F])*'
