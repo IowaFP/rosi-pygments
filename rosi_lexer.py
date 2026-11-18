@@ -47,9 +47,16 @@ class RosiLexer(RegexLexer):
       'root': [
           # Whitespace:
           (r'\s+', Text),
+
           # (r'--\s*|.*$', Comment.Doc),
           (r'--(?![!#$%&*+./<=>?@^|_~:\\]).*?$', Comment.Single),
           (r'\{-', Comment.Multiline, 'comment'),
+
+          # Match labels matching: \B(\'\w+)\b
+          (r"(\'\w+)\b", String.Other),
+          # Match singletons e.g. #'l, #'x, #'y
+          (r"(#\'?\w+)\b", String.Other),
+          
           (r'\'(\w|\n)+', Number.Integer),
           # Lexemes:
           #  Identifiers
@@ -108,12 +115,6 @@ class RosiLexer(RegexLexer):
           # import X
           (r'[\w.]+', Name.Namespace, '#pop'),
       ],
-      'labels': [
-         # Match labels matching: \B(\'\w+)\b
-         (r"(\'\w+)\b", String.Other),
-          # Match singletons e.g. #'l, #'x, #'y
-          (r"(#\'?\w+)\b", String.Other),
-       ],
       'module': [
           (r'\s+', Text),
           (r'([' + uni.Lu + r'][\w.]*)(\s+)(\()',

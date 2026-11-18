@@ -57,6 +57,14 @@ Using the "colorful" Minted theme, this renders as:
 
 ![image](./img/example.png)
 
+## Rosi Styles
+
+The instructions above will also install the `rosi-agda` theme, designed to closely mirror the default literate agda LaTeX styling. You can use this stylesheet via:
+
+```tex
+\usemintedstyle{rosi-agda}
+```
+
 
 ## Making Changes
 
