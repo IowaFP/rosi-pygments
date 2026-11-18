@@ -21,7 +21,6 @@ __all__ = ['RosiLexer']
 
 line_re = re.compile('.*?\n')
 
-
 class RosiLexer(RegexLexer):
   """
   Lexer for the Rosi language.
@@ -35,9 +34,17 @@ class RosiLexer(RegexLexer):
 
   flags = re.MULTILINE | re.UNICODE
 
-  reserved = ('forall', 'Pi', 'Sigma', 'Mu',
-              'Record', 'Variant', 'row',
-              'let', 'newtype', 'type', 'in', 'out', 'fix', 'prj', 'inj', 'ana', 'syn', 'Π', 'Σ', 'μ', 'L', '⋆')
+  reserved = ('forall', '∀',
+              'exists', '∃',
+              'Pi',     'Π',    'Record',
+              'Sigma',  'Σ', 'Variant',
+              'Mu',     'μ',
+              'row', 'let', 
+              'newtype', 'type', 
+              'L', '⋆')
+
+  constants = ('in', 'out', 'fix', 'prj', 'inj', 'ana', 'syn')
+
   ascii = ('NUL', 'SOH', '[SE]TX', 'EOT', 'ENQ', 'ACK',
            'BEL', 'BS', 'HT', 'LF', 'VT', 'FF', 'CR', 'S[OI]', 'DLE',
            'DC[1-4]', 'NAK', 'SYN', 'ETB', 'CAN',
@@ -53,9 +60,9 @@ class RosiLexer(RegexLexer):
           (r'\{-', Comment.Multiline, 'comment'),
 
           # Match labels matching: \B(\'\w+)\b
-          (r"(\'\w+)\b", String.Other),
+          (r"(\'\w+)\b", Keyword.Label),
           # Match singletons e.g. #'l, #'x, #'y
-          (r"(#\'?\w+)\b", String.Other),
+          (r"(#\'?\w+)\b", Keyword.Label),
           
           (r'\'(\w|\n)+', Number.Integer),
           # Lexemes:
@@ -64,6 +71,7 @@ class RosiLexer(RegexLexer):
           (r'\bmodule\b', Keyword.Reserved, 'module'),
           (r'\berror\b', Name.Exception),
           (r'\b(%s)(?!\')\b' % '|'.join(reserved), Keyword.Reserved),
+          (r'\b(%s)(?!\')\b' % '|'.join(constants), Keyword.Constant),
           (r"'[^\\]'", String.Char),  # this has to come before the TH quote
           (r'^[_' + uni.Ll + r'][\w\']*', Name.Function),
           (r"'?[_" + uni.Ll + r"][\w']*", Name),
@@ -75,6 +83,7 @@ class RosiLexer(RegexLexer):
           (r'\#', Keyword),
           (r'\\(?![:!#$%&*+.\\/<=>?@^|~-]+)', Name.Function),  # lambda operator
           (r'/\\(?![:!#$%&*+.\\/<=>?@^|~-]+)', Name.Function),
+          
           (r'(<-|:|->|=>|=)(?![:!#$%&*+.\\/<=>?@^|~-]+)', Operator.Word),  # specials
           (r':[:!#$%&*+.\\/<=>?@^|~-]*', Keyword.Type),  # Constructor operators
           (r'[:!#$%&*+.\\/<=>?@^|~-μΠΣ⇒→▹∀⊤_∖λΛ＠⋆L]+', Operator),  # Other operators
